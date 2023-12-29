@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for survey in surveys %}
+        <h3>{{ survey.tg_ID }}</h3>
+        <p>{{ survey.quest1 }}</p>
+        <p>{{ survey.quest2 }}</p>
+        <p>{{ survey.quest3 }}</p>
+        <p>{{ survey.quest4 }}</p>
+        <small>{{ survey.created_at }}</small>
+    {% endfor %}
+{% endblock %}

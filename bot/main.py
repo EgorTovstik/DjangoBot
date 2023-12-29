@@ -4,8 +4,8 @@ import os
 import logging
 import sys
 
-from aiogram import Dispatcher, Bot, F
 from dotenv import load_dotenv
+from aiogram import Dispatcher, Bot, F
 from aiogram.enums import ParseMode
 from aiogram.filters import Command
 
@@ -13,7 +13,7 @@ from utils.commands import set_commands
 from state.register import RegisterState
 from state.survey import SurveyState
 from handlers.start import get_start
-from handlers.register import (start_register, register_name, register_phone_num)
+from handlers.register import (start_register, register_name, register_phone_num, register_consent)
 from handlers.survey import (start_survey, survey_quest1, survey_quest2,
                              survey_quest3, survey_quest4)
 
@@ -34,10 +34,12 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 dp.message.register(get_start, Command(commands='start'))
 
+
 # хендлер регистрации
 dp.message.register(start_register, F.text == 'Зарегистрироваться')
 dp.message.register(register_name, RegisterState.regName)
 dp.message.register(register_phone_num, RegisterState.regPhonNum)
+dp.message.register(register_consent, RegisterState.consentMailList)
 
 # хендлер прохождения опроса
 dp.message.register(start_survey, F.text == 'Перейти к опросам')

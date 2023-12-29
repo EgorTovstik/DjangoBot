@@ -15,6 +15,10 @@ class BotUser(models.Model):
         verbose_name='Номер телефона'
     )
 
+    consent_mail_list = models.TextField(
+        verbose_name='Согласие на рассылку',
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -27,22 +31,37 @@ class BotUser(models.Model):
         return f'{self.tg_ID} {self.phone_num}'
 
 
+class MailList(models.Model):
+    text = models.TextField(
+        max_length=500,
+        verbose_name='Текст рассылки'
+    )
+
+    class Meta:
+        verbose_name = 'Рассылка'
+        verbose_name_plural = 'Рассылки'
+
+
 class Survey(models.Model):
-    tg_ID = models.TextField(
+    tg_ID = models.CharField(
         max_length=100,
         verbose_name='ID пользователя из телеграмма',
-        null=True
+        null=True,
     )
-    quest1 = models.TextField(
+    quest1 = models.CharField(
+        max_length=100,
         verbose_name='Вопрос 1',
     )
-    quest2 = models.TextField(
+    quest2 = models.CharField(
+        max_length=100,
         verbose_name='Вопрос 2',
     )
-    quest3 = models.TextField(
+    quest3 = models.CharField(
+        max_length=100,
         verbose_name='Вопрос 3',
     )
-    quest4 = models.TextField(
+    quest4 = models.CharField(
+        max_length=100,
         verbose_name='Вопрос 4',
     )
     created_at = models.DateTimeField(
@@ -51,7 +70,7 @@ class Survey(models.Model):
     )
 
     def __str__(self):
-        return f'Прошел {self.pk}, {self.created_at}'
+        return f'Прошел {self.tg_ID}, {self.created_at}'
 
     class Meta:
         verbose_name = 'Опрос'

@@ -5,7 +5,7 @@ import json
 DATABASE_URL = 'http://127.0.0.1:8000/api/v1'
 
 
-def create_user(tg_id, name, phone_num):
+def create_user(tg_id, name, phone_num, consent_mail_list):
     url = f"{DATABASE_URL}/bot-users"
     response = requests.get(url=url).text
     data = json.loads(response)
@@ -15,7 +15,12 @@ def create_user(tg_id, name, phone_num):
             user_exist = True
             break
     if user_exist == False:
-        requests.post(url=url, data={"tg_ID": tg_id, "name": name, "phone_num": phone_num})
+        requests.post(url=url, data={
+            "tg_ID": tg_id,
+            "name": name,
+            "phone_num": phone_num,
+            "consent_mail_list": consent_mail_list
+        })
         return "Пользователь успешно загружен"
     else:
         return "Вы уже зарегистрированы!"
@@ -34,4 +39,9 @@ def create_survey(tg_id, quest1, quest2, quest3, quest4):
         return "Результаты опроса сохранены"
     else:
         return "Результаты опроса не сохранены"
+
+
+def get_mail_list(text):
+    url = f"{DATABASE_URL}/mail-list"
+    requests.get(url=url, data={"text": text})
 

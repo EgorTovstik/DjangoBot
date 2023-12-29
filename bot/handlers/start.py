@@ -6,8 +6,10 @@ from aiogram import Bot
 from aiogram.types import Message
 from dotenv import load_dotenv
 
+
 from bot.keyboards.register_kb import register_kb
 from bot.keyboards.survey_kb import survey_kb
+
 
 load_dotenv()
 
