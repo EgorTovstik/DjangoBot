@@ -41,7 +41,9 @@ def create_survey(tg_id, quest1, quest2, quest3, quest4):
         return "Результаты опроса не сохранены"
 
 
-def get_mail_list(text):
-    url = f"{DATABASE_URL}/mail-list"
-    requests.get(url=url, data={"text": text})
+def get_mailing_text(id):
+    url_mailing = f"{DATABASE_URL}/mail-list"
+    response_mailing = requests.get(url=url_mailing)
+    data = response_mailing.json()
+    return data
 

@@ -16,7 +16,7 @@ from handlers.start import get_start
 from handlers.register import (start_register, register_name, register_phone_num, register_consent)
 from handlers.survey import (start_survey, survey_quest1, survey_quest2,
                              survey_quest3, survey_quest4)
-
+from handlers.mailing import get_mailing
 
 load_dotenv()
 
@@ -34,6 +34,8 @@ async def start_bot(bot: Bot):
 dp.startup.register(start_bot)
 dp.message.register(get_start, Command(commands='start'))
 
+# команда рассылки
+dp.message.register(get_mailing, Command(commands='mailing'))
 
 # хендлер регистрации
 dp.message.register(start_register, F.text == 'Зарегистрироваться')
