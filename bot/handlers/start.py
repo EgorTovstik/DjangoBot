@@ -21,6 +21,7 @@ async def get_start(message: Message, bot: Bot):
     response = requests.get(url=url).text
     data = json.loads(response)
     user_exist = False
+    # Проверка на существование пользователя в базе данных
     for i in data:
         if i["tg_ID"] == str(message.from_user.id):
             await bot.send_message(message.from_user.id, f'С возвращением, {message.from_user.first_name}! \n'

@@ -14,13 +14,14 @@ load_dotenv()
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 
+# Отправка рассылки пользователям
 async def get_mailing(message: Message, bot: Bot):
     url = f"{DATABASE_URL}/bot-users"
     response = requests.get(url=url).text
     data = json.loads(response)
 
     msg = str(get_mailing_text(1))
-
+    # Проверка на наличие согласия на рассылку
     for i in data:
         if i["consent_mail_list"] == "Да":
             await bot.send_message(message.from_user.id, msg)

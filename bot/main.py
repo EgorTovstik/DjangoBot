@@ -20,13 +20,14 @@ from handlers.mailing import get_mailing
 
 load_dotenv()
 
-token = os.getenv('TOKEN')
-admin_id = os.getenv('ADMIN_ID')
+token = os.getenv('TOKEN') # Получение токена бота
+admin_id = os.getenv('ADMIN_ID') # Получение ID администратора
 
 dp = Dispatcher()
 bot = Bot(token, parse_mode=ParseMode.HTML)
 
 
+# Функция отправки сообщения администратору при запуске бота
 async def start_bot(bot: Bot):
     await bot.send_message(admin_id, text='Бот запущен')
 
@@ -37,13 +38,13 @@ dp.message.register(get_start, Command(commands='start'))
 # команда рассылки
 dp.message.register(get_mailing, Command(commands='mailing'))
 
-# хендлер регистрации
+# обработчик регистрации
 dp.message.register(start_register, F.text == 'Зарегистрироваться')
 dp.message.register(register_name, RegisterState.regName)
 dp.message.register(register_phone_num, RegisterState.regPhonNum)
 dp.message.register(register_consent, RegisterState.consentMailList)
 
-# хендлер прохождения опроса
+# обработчик прохождения опроса
 dp.message.register(start_survey, F.text == 'Перейти к опросам')
 dp.message.register(survey_quest1, SurveyState.quest1)
 dp.message.register(survey_quest2, SurveyState.quest2)
@@ -52,7 +53,8 @@ dp.message.register(survey_quest4, SurveyState.quest4)
 
 
 async def start():
-    await set_commands(bot)
+    await set_commands(bot) # Получение команд для бота
+    # Попытка запуска бота
     try:
         await dp.start_polling(bot, skip_updates=True)
     finally:

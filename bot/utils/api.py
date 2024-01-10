@@ -5,6 +5,7 @@ import json
 DATABASE_URL = 'http://127.0.0.1:8000/api/v1'
 
 
+# Функция создания нового пользователя в таблице "Пользователи"
 def create_user(tg_id, name, phone_num, consent_mail_list):
     url = f"{DATABASE_URL}/bot-users"
     response = requests.get(url=url).text
@@ -26,6 +27,7 @@ def create_user(tg_id, name, phone_num, consent_mail_list):
         return "Вы уже зарегистрированы!"
 
 
+# Функция создания результатов опроса в таблице "Опросы"
 def create_survey(tg_id, quest1, quest2, quest3, quest4):
     url = f"{DATABASE_URL}/surveys"
     if quest1 and quest2 and quest3 and quest4:
@@ -41,6 +43,7 @@ def create_survey(tg_id, quest1, quest2, quest3, quest4):
         return "Результаты опроса не сохранены"
 
 
+# Функция получения текста из таблицы "Рассылка"
 def get_mailing_text(id):
     url_mailing = f"{DATABASE_URL}/mail-list"
     response_mailing = requests.get(url=url_mailing)

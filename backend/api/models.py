@@ -1,6 +1,6 @@
 from django.db import models
 
-
+# Таблица пользователей
 class BotUser(models.Model):
     tg_ID = models.CharField(
         max_length=100,
@@ -30,7 +30,7 @@ class BotUser(models.Model):
     def __str__(self):
         return f'{self.tg_ID} {self.phone_num}'
 
-
+# Таблица рассылки
 class MailList(models.Model):
     text = models.TextField(
         max_length=500,
@@ -41,7 +41,7 @@ class MailList(models.Model):
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
 
-
+# Таблица ответы на опрос
 class Survey(models.Model):
     tg_ID = models.CharField(
         max_length=100,
