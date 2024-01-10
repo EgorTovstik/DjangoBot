@@ -51,5 +51,3 @@ def get_mailing_text(id):
     data = data[0]['text']
     return data
 
-
-print(get_mailing_text(1))
