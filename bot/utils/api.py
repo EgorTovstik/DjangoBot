@@ -46,7 +46,10 @@ def create_survey(tg_id, quest1, quest2, quest3, quest4):
 # Функция получения текста из таблицы "Рассылка"
 def get_mailing_text(id):
     url_mailing = f"{DATABASE_URL}/mail-list"
-    response_mailing = requests.get(url=url_mailing)
-    data = response_mailing.json()
+    response_mailing = requests.get(url=url_mailing).text
+    data = json.loads(response_mailing)
+    data = data[0]['text']
     return data
 
+
+print(get_mailing_text(1))
