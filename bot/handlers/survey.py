@@ -10,27 +10,27 @@ from bot.keyboards.survey_kb import quest_kb
 
 async def start_survey(message: Message, state: FSMContext):
     await message.answer(f'Первый вопрос {message.from_user.first_name} \n'
-                         f'...', reply_markup=quest_kb)
+                         f'Python поддерживает множественное наследование?', reply_markup=quest_kb)
     await state.set_state(SurveyState.quest1)
 
 
 async def survey_quest1(message: Message, state: FSMContext):
     await message.answer(f'Второй вопрос \n'
-                         f'...', reply_markup=quest_kb)
+                         f'В Python есть возможность перегрузки операторов?', reply_markup=quest_kb)
     await state.update_data(surquest1=message.text)
     await state.set_state(SurveyState.quest2)
 
 
 async def survey_quest2(message: Message, state: FSMContext):
     await message.answer(f'Третий вопрос \n'
-                         f'...', reply_markup=quest_kb)
+                         f'Можно ли в Python создавать анонимные функции при помощи lambda?', reply_markup=quest_kb)
     await state.update_data(surquest2=message.text)
     await state.set_state(SurveyState.quest3)
 
 
 async def survey_quest3(message: Message, state: FSMContext):
     await message.answer(f'Четвертый вопрос \n'
-                         f'...', reply_markup=quest_kb)
+                         f'Python обязательно требует явного указания типов данных при объявлении переменных?', reply_markup=quest_kb)
     await state.update_data(surquest3=message.text)
     await state.set_state(SurveyState.quest4)
 
